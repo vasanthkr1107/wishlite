@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: wish-lite
+  servlet:
+    multipart:
+      max-file-size: 16MB
+      max-request-size: 24MB
+  datasource:
+    url: jdbc:h2:file:./data/wishlite;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+wishlite:
+  upload-dir: ./uploads
+  jwt-secret: wish-lite-dev-secret-change-in-production
+  # Optional OpenAI-compatible endpoint (OpenAI, Groq, Together, Ollama, etc.)
+  ai:
+    enabled: ${WISHLITE_AI_ENABLED:true}
+    api-key: ${OPENAI_API_KEY:}
+    base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
+    model: ${OPENAI_MODEL:gpt-4o-mini}
